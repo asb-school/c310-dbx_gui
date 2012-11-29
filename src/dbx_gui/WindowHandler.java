@@ -9,6 +9,7 @@ public class WindowHandler
 {
     public static JFrame playerFrame;
     public static JFrame regionFrame;
+    public static JFrame loginFrame;
     public static MenuDialog menuDialog;
     
     private WindowHandler()
@@ -19,9 +20,18 @@ public class WindowHandler
     public static void init()
     {
         // Create windows
+        createLoginFrame();
         createPlayerFrame();
         createMenuDialog();
         createRegionFrame();
+    }
+    
+    private static void createLoginFrame()
+    {
+        loginFrame = new JFrame();
+        loginFrame.setContentPane(new gui.LoginWindow());
+        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        loginFrame.pack();
     }
     
     private static void createPlayerFrame()
@@ -53,8 +63,14 @@ public class WindowHandler
         regionFrame.pack();
     }
     
+    public static void showLoginFrame()
+    {
+        loginFrame.setVisible(true);
+    }
+    
     public static void showMenuDialog()
     {
+        loginFrame.setVisible(false);
         playerFrame.setVisible(false);
         regionFrame.setVisible(false);
         menuDialog.setVisible(true);
