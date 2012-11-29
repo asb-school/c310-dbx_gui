@@ -4,6 +4,8 @@
  */
 package dbx_gui;
 
+import gui.MenuDialog;
+import gui.PlayerForm;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 
@@ -60,10 +62,26 @@ public class Main {
         // TODO code application logic here
        // testDbOp();
         //gui.MsgBox.msg("Hello");
-        gui.PlayerForm.main(args);
-        gui.RegionForm.main(args);
+        //gui.MenuDialog.main(args);
+        
+       /* JFrame frame = new JFrame();
+        frame.setContentPane(new PlayerForm());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+        */
+        
+        // Initialize the window handler
+        WindowHandler.init();
+        
+        // Show the menu dialog
+        WindowHandler.showMenuDialog();
+        
+        
+        //gui.PlayerForm.main(args);
+        //gui.RegionForm.main(args);
         //gui.TestForm.main(args);
-        gui.WorldDisplayFrame.main(args);
+        //gui.WorldDisplayFrame.main(args);
         //gui.MsgBox.msg("Continue");
         
         /*

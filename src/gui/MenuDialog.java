@@ -5,6 +5,7 @@
 package gui;
 
 import dbx_gui.Main;
+import javax.swing.JFrame;
 
 /**
  *
@@ -91,14 +92,11 @@ public class MenuDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void playerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playerButtonActionPerformed
-        // TODO add your handling code here:
-        //Main.setMenuChoice(Main.MenuPlayer);
-        //doClose();
+        dbx_gui.WindowHandler.showPlayerFrame();
     }//GEN-LAST:event_playerButtonActionPerformed
 
     private void regionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regionButtonActionPerformed
-        // TODO add your handling code here:
-        //Main.setMenuChoice(Main.MenuRegion);
+        dbx_gui.WindowHandler.showRegionFrame();
     }//GEN-LAST:event_regionButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed

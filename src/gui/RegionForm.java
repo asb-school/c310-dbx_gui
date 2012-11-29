@@ -48,6 +48,7 @@ public class RegionForm extends JPanel {
         refreshButton = new javax.swing.JButton();
         newButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
+        menuButton = new javax.swing.JButton();
 
         FormListener formListener = new FormListener();
 
@@ -94,6 +95,9 @@ public class RegionForm extends JPanel {
 
         deleteButton.addActionListener(formListener);
 
+        menuButton.setText("Menu");
+        menuButton.addActionListener(formListener);
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,10 +121,14 @@ public class RegionForm extends JPanel {
                                     .add(nameLabel))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(idField, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-                                    .add(nameField, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)))
-                            .add(masterScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE))))
+                                    .add(idField)
+                                    .add(nameField)))
+                            .add(masterScrollPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addContainerGap())
+            .add(layout.createSequentialGroup()
+                .add(154, 154, 154)
+                .add(menuButton)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(new java.awt.Component[] {deleteButton, newButton, refreshButton, saveButton}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
@@ -129,7 +137,7 @@ public class RegionForm extends JPanel {
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(masterScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                .add(masterScrollPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(idLabel)
@@ -140,11 +148,12 @@ public class RegionForm extends JPanel {
                     .add(nameField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(saveButton)
-                    .add(refreshButton)
+                    .add(newButton)
                     .add(deleteButton)
-                    .add(newButton))
-                .addContainerGap())
+                    .add(refreshButton)
+                    .add(saveButton))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(menuButton))
         );
 
         bindingGroup.bind();
@@ -166,6 +175,9 @@ public class RegionForm extends JPanel {
             }
             else if (evt.getSource() == deleteButton) {
                 RegionForm.this.deleteButtonActionPerformed(evt);
+            }
+            else if (evt.getSource() == menuButton) {
+                RegionForm.this.menuButtonActionPerformed(evt);
             }
         }
     }// </editor-fold>//GEN-END:initComponents
@@ -220,6 +232,10 @@ public class RegionForm extends JPanel {
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
+    private void menuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonActionPerformed
+        dbx_gui.WindowHandler.showMenuDialog();
+    }//GEN-LAST:event_menuButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteButton;
     private javax.persistence.EntityManager entityManager;
@@ -228,6 +244,7 @@ public class RegionForm extends JPanel {
     private java.util.List<jpa.Region> list;
     private javax.swing.JScrollPane masterScrollPane;
     private javax.swing.JTable masterTable;
+    private javax.swing.JButton menuButton;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JButton newButton;

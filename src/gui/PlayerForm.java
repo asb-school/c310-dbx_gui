@@ -4,6 +4,7 @@
  */
 package gui;
 
+import dbx_gui.WindowHandler;
 import java.awt.EventQueue;
 import java.beans.Beans;
 import java.util.ArrayList;
@@ -64,6 +65,7 @@ public class PlayerForm extends JPanel {
         refreshButton = new javax.swing.JButton();
         newButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
+        menuButton = new javax.swing.JButton();
 
         FormListener formListener = new FormListener();
 
@@ -200,6 +202,9 @@ public class PlayerForm extends JPanel {
 
         deleteButton.addActionListener(formListener);
 
+        menuButton.setText("Menu");
+        menuButton.addActionListener(formListener);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -207,6 +212,8 @@ public class PlayerForm extends JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(menuButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(newButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteButton)
@@ -297,7 +304,8 @@ public class PlayerForm extends JPanel {
                     .addComponent(saveButton)
                     .addComponent(refreshButton)
                     .addComponent(deleteButton)
-                    .addComponent(newButton))
+                    .addComponent(newButton)
+                    .addComponent(menuButton))
                 .addContainerGap())
         );
 
@@ -309,7 +317,10 @@ public class PlayerForm extends JPanel {
     private class FormListener implements java.awt.event.ActionListener {
         FormListener() {}
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            if (evt.getSource() == saveButton) {
+            if (evt.getSource() == idField) {
+                PlayerForm.this.idFieldActionPerformed(evt);
+            }
+            else if (evt.getSource() == saveButton) {
                 PlayerForm.this.saveButtonActionPerformed(evt);
             }
             else if (evt.getSource() == refreshButton) {
@@ -321,8 +332,8 @@ public class PlayerForm extends JPanel {
             else if (evt.getSource() == deleteButton) {
                 PlayerForm.this.deleteButtonActionPerformed(evt);
             }
-            else if (evt.getSource() == idField) {
-                PlayerForm.this.idFieldActionPerformed(evt);
+            else if (evt.getSource() == menuButton) {
+                PlayerForm.this.menuButtonActionPerformed(evt);
             }
         }
     }// </editor-fold>//GEN-END:initComponents
@@ -381,6 +392,12 @@ public class PlayerForm extends JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_idFieldActionPerformed
 
+    private void menuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonActionPerformed
+        // TODO add your handling code here:
+       dbx_gui.WindowHandler.showMenuDialog();
+                
+    }//GEN-LAST:event_menuButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField birthDateField;
     private javax.swing.JLabel birthDateLabel;
@@ -397,6 +414,7 @@ public class PlayerForm extends JPanel {
     private javax.swing.JLabel loginPasswordLabel;
     private javax.swing.JScrollPane masterScrollPane;
     private javax.swing.JTable masterTable;
+    private javax.swing.JButton menuButton;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JButton newButton;
