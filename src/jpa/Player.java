@@ -75,6 +75,9 @@ public class Player implements Serializable {
     @Basic(optional = false)
     @Column(name = "region_id")
     private int regionId;
+    @Basic(optional = false)
+    @Column(name = "admin")
+    private int admin;
 
     public Player() {
     }
@@ -83,7 +86,7 @@ public class Player implements Serializable {
         this.id = id;
     }
 
-    public Player(Integer id, String name, float health, float skillLevel, int birthDate, int posX, int posY, String loginName, String loginPassword, int regionId) {
+    public Player(Integer id, String name, float health, float skillLevel, int birthDate, int posX, int posY, String loginName, String loginPassword, int regionId, int admin) {
         this.id = id;
         this.name = name;
         this.health = health;
@@ -94,6 +97,7 @@ public class Player implements Serializable {
         this.loginName = loginName;
         this.loginPassword = loginPassword;
         this.regionId = regionId;
+        this.admin = admin;
     }
 
     public Integer getId() {
@@ -194,6 +198,16 @@ public class Player implements Serializable {
         int oldRegionId = this.regionId;
         this.regionId = regionId;
         changeSupport.firePropertyChange("regionId", oldRegionId, regionId);
+    }
+
+     public Integer getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Integer admin) {
+        Integer oldAdmin = this.admin;
+        this.admin = admin;
+        changeSupport.firePropertyChange("admin", oldAdmin, admin);
     }
 
     @Override

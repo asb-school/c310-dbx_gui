@@ -66,6 +66,9 @@ public class WindowHandler
     public static void showLoginFrame()
     {
         loginFrame.setVisible(true);
+        menuDialog.setVisible(false);
+        regionFrame.setVisible(false);
+        playerFrame.setVisible(false);
     }
     
     public static void showMenuDialog()

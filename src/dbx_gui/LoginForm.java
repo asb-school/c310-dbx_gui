@@ -194,7 +194,22 @@ public class LoginForm extends JPanel {
             // Set globals
             Global.authn_player_id = p.getId();
 
+            // Admin is 1, regular user is 0
+            int admin = p.getAdmin();
+
+            if (admin == 1)
+            {
+                // This is an admin. Administer full ban-hammer privileges
+                Global.is_admin_authn = true;
+
+                // debug
+                System.out.println("Admin logged in.");
+            }
+
             // Route to menu
+            loginNameField.setText("");
+            loginPasswordField.setText("");
+            
             dbx_gui.WindowHandler.showMenuDialog();
         }
         else

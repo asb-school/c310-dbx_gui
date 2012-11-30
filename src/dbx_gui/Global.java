@@ -25,7 +25,7 @@ public class Global {
     /**
      * If a player is logged in, remember the player id.
      */
-    public static long authn_player_id;
+    public static long authn_player_id = 0;
     
     /**
      * Collection of all test objects
