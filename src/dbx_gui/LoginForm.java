@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.RollbackException;
@@ -172,51 +173,59 @@ public class LoginForm extends JPanel {
         jpa.Player p = new jpa.Player();
 
         // Get query result, assign to player
-        p = (jpa.Player) q.getSingleResult();
-
-        // Get passwords
-        String dbPassword = p.getLoginPassword();
-        String hashedPassword = null;
-
-        // Hash plain password
-        try {
-            hashedPassword = Global.hashMD5(plainPassword);
-        } catch (Exception ex) {
-            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        // Check if correct password
-        if (hashedPassword.equals(dbPassword))
+        try
         {
-            // Player is authenticated
-            Global.is_player_authn = true;
+            p = (jpa.Player) q.getSingleResult();
+            
+            // Get passwords
+            String dbPassword = p.getLoginPassword();
+            String hashedPassword = null;
 
-            // Set globals
-            Global.authn_player_id = p.getId();
-
-            // Admin is 1, regular user is 0
-            int admin = p.getAdmin();
-
-            if (admin == 1)
-            {
-                // This is an admin. Administer full ban-hammer privileges
-                Global.is_admin_authn = true;
-
-                // debug
-                System.out.println("Admin logged in.");
+            // Hash plain password
+            try {
+                hashedPassword = Global.hashMD5(plainPassword);
+            } catch (Exception ex) {
+                Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            // Route to menu
-            loginNameField.setText("");
-            loginPasswordField.setText("");
-            
-            dbx_gui.WindowHandler.showMenuDialog();
+            // Check if correct password
+            if (hashedPassword.equals(dbPassword))
+            {
+                // Player is authenticated
+                Global.is_player_authn = true;
+
+                // Set globals
+                Global.authn_player_id = p.getId();
+
+                // Admin is 1, regular user is 0
+                int admin = p.getAdmin();
+
+                if (admin == 1)
+                {
+                    // This is an admin. Administer full ban-hammer privileges
+                    Global.is_admin_authn = true;
+
+                    // debug
+                    System.out.println("Admin logged in.");
+                }
+
+                // Route to menu
+                loginNameField.setText("");
+                loginPasswordField.setText("");
+                
+                dbx_gui.WindowHandler.showMenuDialog();
+            }
+            else
+            {
+                errMsg.setVisible(true);
+                System.out.println("Access denied");
+                
+            }
         }
-        else
+        catch (NoResultException e)
         {
             errMsg.setVisible(true);
-            System.out.println("Access denied");
-            
+            System.out.println("Username not found");
         }
 
         // End transaction
