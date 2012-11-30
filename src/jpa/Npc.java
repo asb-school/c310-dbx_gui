@@ -4,6 +4,8 @@
  */
 package jpa;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -16,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -31,6 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Npc.findByPosX", query = "SELECT n FROM Npc n WHERE n.posX = :posX"),
     @NamedQuery(name = "Npc.findByPosY", query = "SELECT n FROM Npc n WHERE n.posY = :posY")})
 public class Npc implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,7 +73,9 @@ public class Npc implements Serializable {
     }
 
     public void setId(Integer id) {
+        Integer oldId = this.id;
         this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public int getPosX() {
@@ -76,7 +83,9 @@ public class Npc implements Serializable {
     }
 
     public void setPosX(int posX) {
+        int oldPosX = this.posX;
         this.posX = posX;
+        changeSupport.firePropertyChange("posX", oldPosX, posX);
     }
 
     public int getPosY() {
@@ -84,7 +93,9 @@ public class Npc implements Serializable {
     }
 
     public void setPosY(int posY) {
+        int oldPosY = this.posY;
         this.posY = posY;
+        changeSupport.firePropertyChange("posY", oldPosY, posY);
     }
 
     public NpcType getNpcTypeId() {
@@ -92,7 +103,9 @@ public class Npc implements Serializable {
     }
 
     public void setNpcTypeId(NpcType npcTypeId) {
+        NpcType oldNpcTypeId = this.npcTypeId;
         this.npcTypeId = npcTypeId;
+        changeSupport.firePropertyChange("npcTypeId", oldNpcTypeId, npcTypeId);
     }
 
     public Region getRegionId() {
@@ -100,7 +113,9 @@ public class Npc implements Serializable {
     }
 
     public void setRegionId(Region regionId) {
+        Region oldRegionId = this.regionId;
         this.regionId = regionId;
+        changeSupport.firePropertyChange("regionId", oldRegionId, regionId);
     }
 
     @Override
@@ -126,6 +141,14 @@ public class Npc implements Serializable {
     @Override
     public String toString() {
         return "jpa.Npc[ id=" + id + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }
