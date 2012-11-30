@@ -119,10 +119,8 @@
     <Component class="javax.swing.JButton" name="regionButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Region"/>
+        <Property name="enabled" type="boolean" value="true"/>
       </Properties>
-      <BindingProperties>
-        <BindingProperty name="enabled" source="dirtyHax" sourcePath="${text == 1}" target="regionButton" targetPath="enabled" updateStrategy="0" immediately="false"/>
-      </BindingProperties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="regionButtonActionPerformed"/>
       </Events>

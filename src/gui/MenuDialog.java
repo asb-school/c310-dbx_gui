@@ -23,16 +23,6 @@ public class MenuDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        dirtyHax.setVisible(false);
-        // If not an admin, restrict access to certain modules
-        if (Global.is_admin_authn == true)
-        {
-            dirtyHax.setText("1");
-        }
-        else if (Global.is_admin_authn == false)
-        {
-            dirtyHax.setText("0");
-        }
     }
 
     /**
@@ -43,7 +33,6 @@ public class MenuDialog extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         playerButton = new javax.swing.JButton();
         menuLabel = new javax.swing.JLabel();
@@ -70,10 +59,7 @@ public class MenuDialog extends javax.swing.JDialog {
         menuLabel.setText("Choose a menu option");
 
         regionButton.setText("Region");
-
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, dirtyHax, org.jdesktop.beansbinding.ELProperty.create("${text == 1}"), regionButton, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
+        regionButton.setEnabled(true);
         regionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 regionButtonActionPerformed(evt);
@@ -187,8 +173,6 @@ public class MenuDialog extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        bindingGroup.bind();
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -232,6 +216,22 @@ public class MenuDialog extends javax.swing.JDialog {
         //returnStatus = retStatus;
         setVisible(false);
         dispose();
+    }
+    
+    public void setAdminState(boolean state)
+    {
+        if (state)
+        {
+            npcBtn.setEnabled(true);
+            regionButton.setEnabled(true);
+            npcTypeBtn.setEnabled(true);
+        }
+        else
+        {
+            npcBtn.setEnabled(false);
+            regionButton.setEnabled(false);
+            npcTypeBtn.setEnabled(false);
+        }
     }
     
     /**
@@ -287,6 +287,5 @@ public class MenuDialog extends javax.swing.JDialog {
     private javax.swing.JButton playerButton;
     private javax.swing.JButton regionButton;
     private javax.swing.JButton worldDisplayBtn;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

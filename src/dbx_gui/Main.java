@@ -13,6 +13,14 @@ import javax.swing.JFrame;
 import jpa.Player;
 
 
+/*
+ *  DEVELOPER WARNING
+ * 
+ *  Warning: Everything is a dirty hack from this point on.
+ *  Proceed at your own risk.
+ * 
+ */
+
 public class Main {
 
     public static final int MenuPlayer = 1;

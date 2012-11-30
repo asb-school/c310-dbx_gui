@@ -108,6 +108,15 @@ public class WindowHandler
     
     public static void showMenuDialog()
     {
+        if (Global.is_admin_authn)
+        {
+            menuDialog.setAdminState(true);
+        }
+        else
+        {
+            menuDialog.setAdminState(false);
+        }
+
         loginFrame.setVisible(false);
         npcFrame.setVisible(false);
         npcTypeFrame.setVisible(false);
