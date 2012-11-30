@@ -29,7 +29,7 @@ public class WindowHandler
     private static void createLoginFrame()
     {
         loginFrame = new JFrame();
-        loginFrame.setContentPane(new gui.LoginWindow());
+        loginFrame.setContentPane(new dbx_gui.LoginForm());
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.pack();
     }
