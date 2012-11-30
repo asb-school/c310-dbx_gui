@@ -6,7 +6,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import jpa.Npc;
 
-@Generated(value="EclipseLink-2.3.2.v20111125-r10461", date="2012-11-30T02:58:25")
+@Generated(value="EclipseLink-2.3.2.v20111125-r10461", date="2012-11-30T03:39:57")
 @StaticMetamodel(NpcType.class)
 public class NpcType_ { 
 

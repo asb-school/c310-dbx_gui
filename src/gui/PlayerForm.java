@@ -4,6 +4,7 @@
  */
 package gui;
 
+import dbx_gui.Global;
 import dbx_gui.WindowHandler;
 import java.awt.EventQueue;
 import java.beans.Beans;
@@ -18,6 +19,8 @@ import javax.swing.JPanel;
  * @author villafan
  */
 public class PlayerForm extends JPanel {
+    
+    private int idAboutToDelete = 0;
     
     public PlayerForm() {
         initComponents();
@@ -353,38 +356,82 @@ public class PlayerForm extends JPanel {
     }//GEN-LAST:event_refreshButtonActionPerformed
     
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        int[] selected = masterTable.getSelectedRows();
-        List<jpa.Player> toRemove = new ArrayList<jpa.Player>(selected.length);
-        for (int idx = 0; idx < selected.length; idx++) {
-            jpa.Player p = list.get(masterTable.convertRowIndexToModel(selected[idx]));
-            toRemove.add(p);
-            entityManager.remove(p);
+        int id = Integer.parseInt(idField.getText());
+        
+        // If admin or editing players id
+        if(Global.is_admin_authn ||
+           (Global.is_player_authn && id == Global.authn_player_id))
+        {
+            int[] selected = masterTable.getSelectedRows();
+            List<jpa.Player> toRemove = new ArrayList<jpa.Player>(selected.length);
+            for (int idx = 0; idx < selected.length; idx++) {
+                jpa.Player p = list.get(masterTable.convertRowIndexToModel(selected[idx]));
+                toRemove.add(p);
+                entityManager.remove(p);
+            }
+            list.removeAll(toRemove);
+            
+            // Save ID globally in the class, because when we delete and try to
+            // save, the save method will not have access to the ID to check 
+            // if the authentication is correct or not.
+            idAboutToDelete = id;
         }
-        list.removeAll(toRemove);
+        else
+        {
+            gui.MsgBox.msg("You may only delete your own player");
+        }
     }//GEN-LAST:event_deleteButtonActionPerformed
     
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-        jpa.Player p = new jpa.Player();
-        entityManager.persist(p);
-        list.add(p);
-        int row = list.size() - 1;
-        masterTable.setRowSelectionInterval(row, row);
-        masterTable.scrollRectToVisible(masterTable.getCellRect(row, 0, true));
+        if(Global.is_admin_authn)
+        {
+            jpa.Player p = new jpa.Player();
+            entityManager.persist(p);
+            list.add(p);
+            int row = list.size() - 1;
+            masterTable.setRowSelectionInterval(row, row);
+            masterTable.scrollRectToVisible(masterTable.getCellRect(row, 0, true));
+        }
+        else
+        {
+            gui.MsgBox.msg("Only an admin can do that");
+        }
     }//GEN-LAST:event_newButtonActionPerformed
     
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        try {
-            entityManager.getTransaction().commit();
-            entityManager.getTransaction().begin();
-        } catch (RollbackException rex) {
-            rex.printStackTrace();
-            entityManager.getTransaction().begin();
-            List<jpa.Player> merged = new ArrayList<jpa.Player>(list.size());
-            for (jpa.Player p : list) {
-                merged.add(entityManager.merge(p));
+        int id = 0;
+        
+        try
+        {
+            id = Integer.parseInt(idField.getText());
+        }
+        catch (NumberFormatException e)
+        {
+            id = idAboutToDelete;
+        }
+        
+        // If admin or editing players id
+        if(Global.is_admin_authn ||
+           (Global.is_player_authn && id == Global.authn_player_id))
+        {
+        
+            try {
+                entityManager.getTransaction().commit();
+                entityManager.getTransaction().begin();
+            } catch (RollbackException rex) {
+                rex.printStackTrace();
+                entityManager.getTransaction().begin();
+                List<jpa.Player> merged = new ArrayList<jpa.Player>(list.size());
+                for (jpa.Player p : list) {
+                    merged.add(entityManager.merge(p));
+                }
+                list.clear();
+                list.addAll(merged);
             }
-            list.clear();
-            list.addAll(merged);
+        }
+        else
+        {
+            gui.MsgBox.msg("You may only edit your own player");
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 

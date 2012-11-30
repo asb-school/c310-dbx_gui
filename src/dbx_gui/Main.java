@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package dbx_gui;
 
 import gui.MenuDialog;
@@ -15,11 +11,6 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.swing.JFrame;
 import jpa.Player;
-
-/**
- *
- * @author roy
- */
 
 
 public class Main {

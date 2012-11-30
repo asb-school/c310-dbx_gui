@@ -30,6 +30,7 @@ public class WorldDisplayFrame extends javax.swing.JFrame {
         drawPanel = new gui.DrawPanel();
         enableAnimationButton = new javax.swing.JButton();
         disableAnimationButton = new javax.swing.JButton();
+        menuBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,11 +45,11 @@ public class WorldDisplayFrame extends javax.swing.JFrame {
         drawPanel.setLayout(drawPanelLayout);
         drawPanelLayout.setHorizontalGroup(
             drawPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+            .add(0, 391, Short.MAX_VALUE)
         );
         drawPanelLayout.setVerticalGroup(
             drawPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 214, Short.MAX_VALUE)
+            .add(0, 369, Short.MAX_VALUE)
         );
 
         enableAnimationButton.setText("Enable Animation");
@@ -65,6 +66,13 @@ public class WorldDisplayFrame extends javax.swing.JFrame {
             }
         });
 
+        menuBtn.setText("Menu");
+        menuBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuBtnActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,18 +85,24 @@ public class WorldDisplayFrame extends javax.swing.JFrame {
                     .add(enableAnimationButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(disableAnimationButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .add(layout.createSequentialGroup()
+                .add(162, 162, 162)
+                .add(menuBtn)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(9, Short.MAX_VALUE)
+                .add(menuBtn)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(updateButton)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(enableAnimationButton)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(disableAnimationButton)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(drawPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(drawPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -109,6 +123,10 @@ public class WorldDisplayFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         drawPanel.startTimer();
     }//GEN-LAST:event_enableAnimationButtonActionPerformed
+
+    private void menuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBtnActionPerformed
+        dbx_gui.WindowHandler.showMenuDialog();
+    }//GEN-LAST:event_menuBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,6 +167,7 @@ public class WorldDisplayFrame extends javax.swing.JFrame {
     private javax.swing.JButton disableAnimationButton;
     private gui.DrawPanel drawPanel;
     private javax.swing.JButton enableAnimationButton;
+    private javax.swing.JButton menuBtn;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }
