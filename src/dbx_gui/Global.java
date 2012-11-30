@@ -57,7 +57,6 @@ public class Global {
     public static String hashMD5(String s) throws Exception
     {
         String plainPassword = s;
-        System.out.println("Hello from md5 func: " + plainPassword);
         String hashedPassword;
         byte[] digest;
 

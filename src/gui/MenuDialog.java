@@ -100,9 +100,7 @@ public class MenuDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_regionButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        // TODO add your handling code here:
-        //Main.setMenuChoice(0);
-        //System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void doClose() {

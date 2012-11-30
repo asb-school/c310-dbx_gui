@@ -28,7 +28,8 @@ public class LoginForm extends JPanel {
     public LoginForm() {
         initComponents();
         if (!Beans.isDesignTime()) {
-           // entityManager.getTransaction().begin();
+           // Hide warning text
+            errMsg.setVisible(false);
         }
     }
 
@@ -47,12 +48,11 @@ public class LoginForm extends JPanel {
         loginNameLabel = new javax.swing.JLabel();
         loginPasswordLabel = new javax.swing.JLabel();
         loginNameField = new javax.swing.JTextField();
-        loginPasswordField = new javax.swing.JTextField();
-        saveButton = new javax.swing.JButton();
-        refreshButton = new javax.swing.JButton();
-        newButton = new javax.swing.JButton();
-        deleteButton = new javax.swing.JButton();
         loginBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        errMsg = new javax.swing.JLabel();
+        loginPasswordField = new javax.swing.JPasswordField();
 
         FormListener formListener = new FormListener();
 
@@ -60,23 +60,20 @@ public class LoginForm extends JPanel {
 
         loginPasswordLabel.setText("Login Password:");
 
-        saveButton.setText("Save");
-        saveButton.setEnabled(false);
-        saveButton.addActionListener(formListener);
-
-        refreshButton.setText("Refresh");
-        refreshButton.setEnabled(false);
-        refreshButton.addActionListener(formListener);
-
-        newButton.setText("New");
-        newButton.setEnabled(false);
-        newButton.addActionListener(formListener);
-
-        deleteButton.setText("Delete");
-        deleteButton.addActionListener(formListener);
+        loginNameField.addFocusListener(formListener);
 
         loginBtn.setText("Login");
         loginBtn.addActionListener(formListener);
+
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel1.setText("Welcome to DBX GUI");
+
+        jLabel2.setText("Please Login");
+
+        errMsg.setForeground(new java.awt.Color(255, 0, 0));
+        errMsg.setText("Access Denied! Please try again.");
+
+        loginPasswordField.addFocusListener(formListener);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
@@ -84,37 +81,37 @@ public class LoginForm extends JPanel {
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                        .add(0, 0, Short.MAX_VALUE)
-                        .add(newButton)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(deleteButton)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(refreshButton)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(saveButton))
                     .add(layout.createSequentialGroup()
                         .add(18, 18, 18)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(loginNameLabel)
-                            .add(loginPasswordLabel))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                            .add(jLabel1)
+                            .add(jLabel2)))
+                    .add(layout.createSequentialGroup()
+                        .addContainerGap()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(loginNameField, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
-                            .add(loginPasswordField, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE))))
-                .addContainerGap())
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .add(0, 0, Short.MAX_VALUE)
-                .add(loginBtn)
-                .add(133, 133, 133))
+                            .add(layout.createSequentialGroup()
+                                .add(12, 12, 12)
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(loginNameLabel)
+                                    .add(loginPasswordLabel))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                                    .add(loginNameField, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                                    .add(loginPasswordField)))
+                            .add(layout.createSequentialGroup()
+                                .add(loginBtn)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                .add(errMsg)))))
+                .add(0, 19, Short.MAX_VALUE))
         );
-
-        layout.linkSize(new java.awt.Component[] {deleteButton, newButton, refreshButton, saveButton}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
-
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(199, 199, 199)
+                .add(18, 18, 18)
+                .add(jLabel1)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jLabel2)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 40, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(loginNameLabel)
                     .add(loginNameField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
@@ -122,100 +119,47 @@ public class LoginForm extends JPanel {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(loginPasswordLabel)
                     .add(loginPasswordField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(18, 18, 18)
-                .add(loginBtn)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(saveButton)
-                    .add(refreshButton)
-                    .add(deleteButton)
-                    .add(newButton))
-                .addContainerGap())
+                    .add(loginBtn)
+                    .add(errMsg))
+                .add(28, 28, 28))
         );
     }
 
     // Code for dispatching events from components to event handlers.
 
-    private class FormListener implements java.awt.event.ActionListener {
+    private class FormListener implements java.awt.event.ActionListener, java.awt.event.FocusListener {
         FormListener() {}
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            if (evt.getSource() == saveButton) {
-                LoginForm.this.saveButtonActionPerformed(evt);
-            }
-            else if (evt.getSource() == refreshButton) {
-                LoginForm.this.refreshButtonActionPerformed(evt);
-            }
-            else if (evt.getSource() == newButton) {
-                LoginForm.this.newButtonActionPerformed(evt);
-            }
-            else if (evt.getSource() == deleteButton) {
-                LoginForm.this.deleteButtonActionPerformed(evt);
-            }
-            else if (evt.getSource() == loginBtn) {
+            if (evt.getSource() == loginBtn) {
                 LoginForm.this.loginBtnActionPerformed(evt);
             }
+        }
+
+        public void focusGained(java.awt.event.FocusEvent evt) {
+            if (evt.getSource() == loginPasswordField) {
+                LoginForm.this.changeErrorMsg(evt);
+            }
+            else if (evt.getSource() == loginNameField) {
+                LoginForm.this.nameAction(evt);
+            }
+        }
+
+        public void focusLost(java.awt.event.FocusEvent evt) {
         }
     }// </editor-fold>//GEN-END:initComponents
 
     
 
-    @SuppressWarnings("unchecked")
-    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-      /*  entityManager.getTransaction().rollback();
-        entityManager.getTransaction().begin();
-        java.util.Collection data = query.getResultList();
-        for (Object entity : data) {
-            entityManager.refresh(entity);
-        }
-        list.clear();
-        list.addAll(data);*/
-    }//GEN-LAST:event_refreshButtonActionPerformed
-    
-    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        /*int[] selected = masterTable.getSelectedRows();
-        List<jpa.Player> toRemove = new ArrayList<jpa.Player>(selected.length);
-        for (int idx = 0; idx < selected.length; idx++) {
-            jpa.Player p = list.get(masterTable.convertRowIndexToModel(selected[idx]));
-            toRemove.add(p);
-            entityManager.remove(p);
-        }
-        list.removeAll(toRemove);*/
-    }//GEN-LAST:event_deleteButtonActionPerformed
-    
-    private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-       /* jpa.Player p = new jpa.Player();
-        entityManager.persist(p);
-        list.add(p);
-        int row = list.size() - 1;
-        masterTable.setRowSelectionInterval(row, row);
-        masterTable.scrollRectToVisible(masterTable.getCellRect(row, 0, true));*/
-    }//GEN-LAST:event_newButtonActionPerformed
-    
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-      /*  try {
-            entityManager.getTransaction().commit();
-            entityManager.getTransaction().begin();
-        } catch (RollbackException rex) {
-            rex.printStackTrace();
-            entityManager.getTransaction().begin();
-            List<jpa.Player> merged = new ArrayList<jpa.Player>(list.size());
-            for (jpa.Player p : list) {
-                merged.add(entityManager.merge(p));
-            }
-            list.clear();
-            list.addAll(merged);
-        }*/
-    }//GEN-LAST:event_saveButtonActionPerformed
-
+           
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-
-        // Begin a transaction
-        //entityManager.getTransaction().begin();
 
         // Get the username & pass from form
         String username = loginNameField.getText();
         String plainPassword = loginPasswordField.getText();
         
+        // Being transaction
         entityManager.getTransaction().begin();
         
         // Query
@@ -223,26 +167,25 @@ public class LoginForm extends JPanel {
 
         // Set params
         q.setParameter("loginName", username);
-        
+    
+        // Create player object
         jpa.Player p = new jpa.Player();
 
+        // Get query result, assign to player
         p = (jpa.Player) q.getSingleResult();
 
         // Get passwords
         String dbPassword = p.getLoginPassword();
         String hashedPassword = null;
+
+        // Hash plain password
         try {
             hashedPassword = Global.hashMD5(plainPassword);
         } catch (Exception ex) {
             Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
-        System.out.println("Given username: " + username);
-        System.out.println("Given password: " + plainPassword);
-        System.out.println("Password from database: " + dbPassword);
-        System.out.println("Hashed password: " + hashedPassword);
-
+        // Check if correct password
         if (hashedPassword.equals(dbPassword))
         {
             // Player is authenticated
@@ -251,32 +194,42 @@ public class LoginForm extends JPanel {
             // Set globals
             Global.authn_player_id = p.getId();
 
-            System.out.println("Access granted");
+            // Route to menu
+            dbx_gui.WindowHandler.showMenuDialog();
         }
         else
         {
+            errMsg.setVisible(true);
             System.out.println("Access denied");
             
         }
 
+        // End transaction
         entityManager.getTransaction().commit();
         
         
     }//GEN-LAST:event_loginBtnActionPerformed
 
+    private void changeErrorMsg(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_changeErrorMsg
+        errMsg.setVisible(false);
+    }//GEN-LAST:event_changeErrorMsg
+
+    private void nameAction(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameAction
+        errMsg.setVisible(false);
+    }//GEN-LAST:event_nameAction
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton deleteButton;
     private javax.persistence.EntityManager entityManager;
+    private javax.swing.JLabel errMsg;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private java.util.List<jpa.Player> list;
     private javax.swing.JButton loginBtn;
     private javax.swing.JTextField loginNameField;
     private javax.swing.JLabel loginNameLabel;
-    private javax.swing.JTextField loginPasswordField;
+    private javax.swing.JPasswordField loginPasswordField;
     private javax.swing.JLabel loginPasswordLabel;
-    private javax.swing.JButton newButton;
     private javax.persistence.Query query;
-    private javax.swing.JButton refreshButton;
-    private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
     public static void main(String[] args) {
         /* Set the Nimbus look and feel */
