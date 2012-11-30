@@ -11,6 +11,7 @@ public class WindowHandler
     public static JFrame regionFrame;
     public static JFrame loginFrame;
     public static JFrame npcFrame;
+    public static JFrame npcTypeFrame;
     public static MenuDialog menuDialog;
     
     private WindowHandler()
@@ -26,6 +27,7 @@ public class WindowHandler
         createMenuDialog();
         createRegionFrame();
         createNpcFrame();
+        createNpcTypeFrame();
     }
     
     private static void createLoginFrame()
@@ -51,6 +53,14 @@ public class WindowHandler
         npcFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         npcFrame.pack();
     }
+
+    private static void createNpcTypeFrame()
+    {
+        npcTypeFrame = new JFrame();
+        npcTypeFrame.setContentPane(new gui.NpcTypeForm());
+        npcTypeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        npcTypeFrame.pack();
+    }
     
     private static void createMenuDialog()
     {
@@ -73,14 +83,13 @@ public class WindowHandler
         regionFrame.pack();
     }
 
-    
-    
     public static void showLoginFrame()
     {
         menuDialog.setVisible(false);
         regionFrame.setVisible(false);
         playerFrame.setVisible(false);
         npcFrame.setVisible(false);
+        npcTypeFrame.setVisible(false);
         loginFrame.setVisible(true);
     }
     
@@ -88,6 +97,7 @@ public class WindowHandler
     {
         loginFrame.setVisible(false);
         npcFrame.setVisible(false);
+        npcTypeFrame.setVisible(false);
         playerFrame.setVisible(false);
         regionFrame.setVisible(false);
         menuDialog.setVisible(true);
@@ -98,6 +108,7 @@ public class WindowHandler
         menuDialog.setVisible(false);
         regionFrame.setVisible(false);
         npcFrame.setVisible(false);
+        npcTypeFrame.setVisible(false);
         playerFrame.setVisible(true);
     }
     
@@ -106,6 +117,7 @@ public class WindowHandler
         menuDialog.setVisible(false);
         playerFrame.setVisible(false);
         npcFrame.setVisible(false);
+        npcTypeFrame.setVisible(false);
         regionFrame.setVisible(true);
     }
 
@@ -114,7 +126,17 @@ public class WindowHandler
         menuDialog.setVisible(false);
         playerFrame.setVisible(false);
         regionFrame.setVisible(false);
+        npcTypeFrame.setVisible(false);
         npcFrame.setVisible(true);
+    }
+
+    public static void showNpcTypeFrame()
+    {
+        menuDialog.setVisible(false);
+        playerFrame.setVisible(false);
+        regionFrame.setVisible(false);
+        npcFrame.setVisible(false);
+        npcTypeFrame.setVisible(true);
     }
          
                 

@@ -4,6 +4,8 @@
  */
 package jpa;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -17,6 +19,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -34,6 +37,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "NpcType.findByAggressiveness", query = "SELECT n FROM NpcType n WHERE n.aggressiveness = :aggressiveness"),
     @NamedQuery(name = "NpcType.findByBenevolence", query = "SELECT n FROM NpcType n WHERE n.benevolence = :benevolence")})
 public class NpcType implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,7 +76,9 @@ public class NpcType implements Serializable {
     }
 
     public void setId(Integer id) {
+        Integer oldId = this.id;
         this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public String getName() {
@@ -79,7 +86,9 @@ public class NpcType implements Serializable {
     }
 
     public void setName(String name) {
+        String oldName = this.name;
         this.name = name;
+        changeSupport.firePropertyChange("name", oldName, name);
     }
 
     public float getAggressiveness() {
@@ -87,7 +96,9 @@ public class NpcType implements Serializable {
     }
 
     public void setAggressiveness(float aggressiveness) {
+        float oldAggressiveness = this.aggressiveness;
         this.aggressiveness = aggressiveness;
+        changeSupport.firePropertyChange("aggressiveness", oldAggressiveness, aggressiveness);
     }
 
     public float getBenevolence() {
@@ -95,7 +106,9 @@ public class NpcType implements Serializable {
     }
 
     public void setBenevolence(float benevolence) {
+        float oldBenevolence = this.benevolence;
         this.benevolence = benevolence;
+        changeSupport.firePropertyChange("benevolence", oldBenevolence, benevolence);
     }
 
     @XmlTransient
@@ -130,6 +143,14 @@ public class NpcType implements Serializable {
     @Override
     public String toString() {
         return "jpa.NpcType[ id=" + id + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }
