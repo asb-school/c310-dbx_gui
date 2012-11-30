@@ -41,13 +41,13 @@ public class Global {
      * Collection of all benevolent NPCs
      * TODO: change Test to NPC class
      */
-  //  public static List<jpa.Test> benNpcColl;
+    public static List<jpa.Npc> benNpcColl;
 
     /**
      * Collection of all aggressive NPCs
      * TODO: change Test to NPC class
      */
-    //public static List<jpa.Test> aggrNpcColl;
+    public static List<jpa.Npc> aggrNpcColl;
 
     /**
      * Hash a string using MD5

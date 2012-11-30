@@ -62,6 +62,44 @@ public class Main {
         }
         //System.out.println("");
     }*/
+
+    public static void getPlayer()
+    {
+        javax.persistence.EntityManager em;
+        javax.persistence.Query query;
+        
+        em = javax.persistence.Persistence.createEntityManagerFactory("dbx_guiPU").createEntityManager();
+        query = em.createQuery("SELECT p FROM Player p");
+        Global.playerColl = query.getResultList();
+    }
+
+
+    public static void getBenNpc()
+    {
+        javax.persistence.EntityManager em;
+        javax.persistence.Query query;
+        
+        int min_benevolence = 0;
+
+        em = javax.persistence.Persistence.createEntityManagerFactory("dbx_guiPU").createEntityManager();
+        query = em.createQuery("SELECT n FROM Npc n WHERE n.benevolence > :min_val");
+        query.setParameter("min_val", min_benevolence);
+        Global.benNpcColl = query.getResultList();
+    }
+
+
+    public static void getAggrNpc()
+    {
+        javax.persistence.EntityManager em;
+        javax.persistence.Query query;
+        
+        int min_aggressive = 0;
+
+        em = javax.persistence.Persistence.createEntityManagerFactory("dbx_guiPU").createEntityManager();
+        query = em.createQuery("SELECT n FROM Npc n WHERE n.aggressiveness > :min_val");
+        query.setParameter("min_val", min_aggressive);
+        Global.aggrNpcColl = query.getResultList();
+    }
     
      
       
@@ -86,6 +124,11 @@ public class Main {
         
         // Show the login form
         WindowHandler.showLoginFrame();
+        
+        // Get all player collections
+        getPlayer();
+        getBenNpc();
+        getAggrNpc();
         
         
         //gui.PlayerForm.main(args);

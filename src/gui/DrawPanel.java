@@ -85,6 +85,15 @@ public class DrawPanel extends javax.swing.JPanel {
         g.fillOval(250, y, 20, 20);
         
         int ty = 100;
+
+        for (jpa.Player p : Global.playerColl)
+        {
+            String pname = p.getName();
+            g.drawString(pname, 200, ty);
+            ty = ty + 50;
+        }
+
+
       /*  for(jpa.Test t: Global.testColl)
         {
             // do something with each Test object t
