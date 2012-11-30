@@ -85,7 +85,7 @@ public class Main {
         // Initialize the window handler
         WindowHandler.init();
         
-        // Show the menu dialog
+        // Show the login form
         WindowHandler.showLoginFrame();
         
         

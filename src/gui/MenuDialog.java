@@ -39,6 +39,7 @@ public class MenuDialog extends javax.swing.JDialog {
         logoutBtn = new javax.swing.JButton();
         npcBtn = new javax.swing.JButton();
         npcTypeBtn = new javax.swing.JButton();
+        worldDisplayBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -90,6 +91,13 @@ public class MenuDialog extends javax.swing.JDialog {
             }
         });
 
+        worldDisplayBtn.setText("World Display");
+        worldDisplayBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                worldDisplayBtnActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,7 +128,10 @@ public class MenuDialog extends javax.swing.JDialog {
                         .add(0, 0, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
                         .addContainerGap()
-                        .add(npcTypeBtn, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .add(npcTypeBtn, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(worldDisplayBtn, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -138,7 +149,9 @@ public class MenuDialog extends javax.swing.JDialog {
                 .add(npcBtn)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(npcTypeBtn)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(worldDisplayBtn)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 39, Short.MAX_VALUE)
                 .add(logoutBtn)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(exitButton)
@@ -179,6 +192,10 @@ public class MenuDialog extends javax.swing.JDialog {
     private void npcTypeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_npcTypeBtnActionPerformed
         dbx_gui.WindowHandler.showNpcTypeFrame();
     }//GEN-LAST:event_npcTypeBtnActionPerformed
+
+    private void worldDisplayBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_worldDisplayBtnActionPerformed
+        dbx_gui.WindowHandler.showWorldDisplay();
+    }//GEN-LAST:event_worldDisplayBtnActionPerformed
 
     private void doClose() {
         //returnStatus = retStatus;
@@ -236,5 +253,6 @@ public class MenuDialog extends javax.swing.JDialog {
     private javax.swing.JButton npcTypeBtn;
     private javax.swing.JButton playerButton;
     private javax.swing.JButton regionButton;
+    private javax.swing.JButton worldDisplayBtn;
     // End of variables declaration//GEN-END:variables
 }
