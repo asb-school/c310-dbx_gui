@@ -17,9 +17,22 @@ public class MenuDialog extends javax.swing.JDialog {
     /**
      * Creates new form MenuJDialog
      */
+    
+       
     public MenuDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        dirtyHax.setVisible(false);
+        // If not an admin, restrict access to certain modules
+        if (Global.is_admin_authn == true)
+        {
+            dirtyHax.setText("1");
+        }
+        else if (Global.is_admin_authn == false)
+        {
+            dirtyHax.setText("0");
+        }
     }
 
     /**
@@ -30,6 +43,7 @@ public class MenuDialog extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         playerButton = new javax.swing.JButton();
         menuLabel = new javax.swing.JLabel();
@@ -40,6 +54,8 @@ public class MenuDialog extends javax.swing.JDialog {
         npcBtn = new javax.swing.JButton();
         npcTypeBtn = new javax.swing.JButton();
         worldDisplayBtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        dirtyHax = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -54,6 +70,10 @@ public class MenuDialog extends javax.swing.JDialog {
         menuLabel.setText("Choose a menu option");
 
         regionButton.setText("Region");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, dirtyHax, org.jdesktop.beansbinding.ELProperty.create("${text == 1}"), regionButton, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         regionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 regionButtonActionPerformed(evt);
@@ -98,15 +118,15 @@ public class MenuDialog extends javax.swing.JDialog {
             }
         });
 
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel2.setText("<html>Note: Buttons grayed out <br /> can only be accessed <br /> by an admin</html>");
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(npcBtn, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
                         .add(15, 15, 15)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -115,23 +135,28 @@ public class MenuDialog extends javax.swing.JDialog {
                                 .add(jLabel1)
                                 .add(0, 0, Short.MAX_VALUE))))
                     .add(layout.createSequentialGroup()
+                        .addContainerGap()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                                    .add(org.jdesktop.layout.GroupLayout.LEADING, exitButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .add(regionButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-                                    .add(playerButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .add(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(logoutBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 192, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                            .add(exitButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 192, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(logoutBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 192, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                         .add(0, 0, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
                         .addContainerGap()
-                        .add(npcTypeBtn, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .add(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(worldDisplayBtn, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, npcBtn, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(npcTypeBtn, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(worldDisplayBtn, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(layout.createSequentialGroup()
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                                        .add(regionButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                                        .add(playerButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .add(layout.createSequentialGroup()
+                                        .add(6, 6, 6)
+                                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                            .add(dirtyHax)
+                                            .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 177, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                                .add(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -141,7 +166,7 @@ public class MenuDialog extends javax.swing.JDialog {
                 .add(jLabel1)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(menuLabel)
-                .add(30, 30, 30)
+                .add(18, 18, 18)
                 .add(playerButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(regionButton)
@@ -151,12 +176,18 @@ public class MenuDialog extends javax.swing.JDialog {
                 .add(npcTypeBtn)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(worldDisplayBtn)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 52, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 34, Short.MAX_VALUE)
+                .add(dirtyHax)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(logoutBtn)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(exitButton)
                 .addContainerGap())
         );
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -245,8 +276,10 @@ public class MenuDialog extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel dirtyHax;
     private javax.swing.JButton exitButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JLabel menuLabel;
     private javax.swing.JButton npcBtn;
@@ -254,5 +287,6 @@ public class MenuDialog extends javax.swing.JDialog {
     private javax.swing.JButton playerButton;
     private javax.swing.JButton regionButton;
     private javax.swing.JButton worldDisplayBtn;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

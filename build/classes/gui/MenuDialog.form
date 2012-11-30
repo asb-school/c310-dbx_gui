@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+<Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
@@ -24,10 +24,6 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="npcBtn" max="32767" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -39,29 +35,36 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="exitButton" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="regionButton" pref="192" max="32767" attributes="0"/>
-                                  <Component id="playerButton" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="logoutBtn" min="-2" pref="192" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="exitButton" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
+                          <Component id="logoutBtn" min="-2" pref="192" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="npcTypeBtn" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="worldDisplayBtn" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="npcBtn" alignment="1" max="32767" attributes="0"/>
+                          <Component id="npcTypeBtn" alignment="0" max="32767" attributes="0"/>
+                          <Component id="worldDisplayBtn" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="regionButton" pref="192" max="32767" attributes="0"/>
+                                      <Component id="playerButton" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="dirtyHax" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel2" min="-2" pref="177" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -75,7 +78,7 @@
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="menuLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="playerButton" min="-2" pref="29" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="regionButton" min="-2" max="-2" attributes="0"/>
@@ -85,7 +88,11 @@
               <Component id="npcTypeBtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="worldDisplayBtn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="39" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel2" min="-2" pref="52" max="-2" attributes="0"/>
+              <EmptySpace pref="34" max="32767" attributes="0"/>
+              <Component id="dirtyHax" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="logoutBtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="exitButton" min="-2" max="-2" attributes="0"/>
@@ -113,6 +120,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Region"/>
       </Properties>
+      <BindingProperties>
+        <BindingProperty name="enabled" source="dirtyHax" sourcePath="${text == 1}" target="regionButton" targetPath="enabled" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="regionButtonActionPerformed"/>
       </Events>
@@ -164,6 +174,16 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="worldDisplayBtnActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="66" green="66" red="66" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;Note: Buttons grayed out &lt;br /&gt; can only be accessed &lt;br /&gt; by an admin&lt;/html&gt;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="dirtyHax">
     </Component>
   </SubComponents>
 </Form>
